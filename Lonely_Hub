@@ -1,0 +1,102 @@
+repeat task.wait() until game:IsLoaded()
+print("Loading.....")
+notis = require(game.ReplicatedStorage:WaitForChild("Notification"))
+notis.new("<Color=White>Chào Mừng Đến Lonely Hub<Color=/>"):Display()
+wait(.2)
+notis.new("<Color=Blue>Owner: LongHip12 <Color=/>"):Display() 
+wait(.32)
+notis.new("<Color=Red>Discord: https://discord.gg/yVptwJPAcM<Color=/>"):Display()
+wait(.3)
+notis.new("<Color=Red>Dùng Fluxus Để Cs Trải Nghiệm Tốt Nhất Nha E:)!<Color=/>"):Display() 
+wait(.3)
+notis.new("<Color=Yellow>Bạn Đang Dùng Client:<Color=/> ".. identifyexecutor()):Display() 
+wait(.2)
+local Library = https://raw.githubusercontent.com/LongHip2012/ScriptBloxFruit/refs/heads/main/Library.lua
+local OrionLib = loadstring(game:HttpGet(('Library')))()
+local Window = OrionLib:MakeWindow({Name = "Lonely Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "LHV2"})
+
+OrionLib:MakeNotification({
+	Name = "Lonely Hub",
+	Content = "Please Select Version",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+wait(.1)
+
+OrionLib:MakeNotification({
+	Name = "Lonely Hub",
+	Content = "Hãy Chọn Phiên Bản!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+local InfoTab = Window:MakeTab({Name = "Information", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+local MainTab = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+
+
+InfoTab:AddLabel("Lonely Hub Socials")
+InfoTab:AddLabel("Youtube Channels") 
+InfoTab:AddLabel("https://www.youtube.com/@FTGxHoangLong") 
+InfoTab:AddButton({
+	Name = "Copy Link Youtube",
+	Callback = function()
+        setclipboard("https://www.youtube.com/@FTGxHoangLong")
+        OrionLib:MakeNotification({Name = "Lonely Hub", Content = "Copied!", Image = "rbxassetid://116732189500359",Time = 5})
+  	end    
+})
+InfoTab:AddLabel("Join For Discord") 
+InfoTab:AddLabel("https://discord.gg/yVptwJPAcM") 
+InfoTab:AddButton({
+	Name = "Copy Link Invite Discord",
+	Callback = function()
+        setclipboard("https://discord.gg/yVptwJPAcM")
+        OrionLib:MakeNotification({Name = "Lonely Hub", Content = "Copied!", Image = "rbxassetid://116732189500359",Time = 5})
+  	end    
+})
+InfoTab:AddLabel("Làm Bởi LongHip12") 
+InfoTab:AddLabel("©Copyright Cấm Deobfuscate Và Skid Dưới Mọi Hình Thức") 
+
+
+local Section = MainTab:AddSection({
+	Name = "Doors Version"
+})
+
+MainTab:AddButton({
+	Name = "LonelyHub Doors",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip2012/Lonely_Hub_Doors/refs/heads/main/main.lua"))()
+        OrionLib:MakeNotification({Name = "Lonely Hub", Content = "Executed!", Image = "rbxassetid://116732189500359",Time = 5})
+  	end    
+})
+
+local Section = MainTab:AddSection({
+	Name = "Blox Fruits Version"
+})
+
+MainTab:AddButton({
+	Name = "Lonely Hub (English)",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip2012/Lonely_Hub/refs/heads/main/LonelyHubV2"))()
+        OrionLib:MakeNotification({Name = "Lonely Hub", Content = "Executed!", Image = "rbxassetid://116732189500359",Time = 5})
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Lonely Hub (Tiếng Việt)",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/LongHip2012/Lonely_Hub/refs/heads/main/LonelyHub_V2_Vietsub"))()
+        OrionLib:MakeNotification({Name = "Lonely Hub", Content = "Executed!", Image = "rbxassetid://116732189500359",Time = 5})
+  	end    
+})
+
+
+print("Level Executor")
+printidentity()
+print("Your Executor You Use")
+printidentifyexecutor()
+identifyexecutor()
+print("UNC Test")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/unified-naming-convention/NamingStandard/refs/heads/main/UNCCheckEnv.lua"))()
+print("All Test Completed!")
+print("Script Loaded!")
