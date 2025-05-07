@@ -1,0 +1,55 @@
+local Player, Speed = game.Players.LocalPlayer, 300
+
+                local function getCharacter()
+                    while not Player.Character do
+                        Player.CharacterAdded:Wait()
+                    end
+                    return Player.Character:WaitForChild("HumanoidRootPart").Parent
+                end
+
+                local function toggleNoclip(state)
+                    for _, v in ipairs(getCharacter():GetChildren()) do
+                        if v:IsA("BasePart") then
+                            v.CanCollide = not state
+                        end
+                    end
+                end
+
+                local function Teleport(targetCFrame, speed)
+                    toggleNoclip(true)
+                    local root = getCharacter().HumanoidRootPart
+                    while (root.Position - targetCFrame.Position).Magnitude > 1 do
+                        root.CFrame =
+                            root.CFrame +
+                            (targetCFrame.Position - root.Position).unit * (speed or Speed) * task.wait(0.05)
+                    end
+                    toggleNoclip(false)
+                end
+
+                local function getChests()
+                    local chests = {}
+                    for _, obj in ipairs(workspace:GetDescendants()) do
+                        if obj.Name:find("Chest") and obj:IsA("Part") and obj:FindFirstChild("TouchInterest") then
+                            table.insert(chests, obj)
+                        end
+                    end
+                    table.sort(
+                        chests,
+                        function(a, b)
+                            return (getCharacter().HumanoidRootPart.Position - a.Position).Magnitude <
+                                (getCharacter().HumanoidRootPart.Position - b.Position).Magnitude
+                        end
+                    )
+                    return chests
+                end
+
+                task.spawn(
+                    function()
+                        while task.wait(0.5) do -- Thêm độ trễ để giảm tải
+                            local chests = getChests()
+                            if #chests > 0 then
+                                Teleport(chests[1].CFrame)
+                            end
+                        end
+                    end
+                )
