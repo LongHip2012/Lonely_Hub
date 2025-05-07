@@ -1,0 +1,28 @@
+_G.Settings = {
+                    ["Start Farm"] = true,
+                    ["Choose Team"] = "Marines",
+                    ["Store Fruit"] = true,
+                    ["Bypass TP"] = false,
+                    ["Next Server Time"] = 20,
+                    ["Chat Settings"] = {
+                        ["Enable"] = false,
+                        ["Messages"] = {
+                            "Skull Hub auto rương khiến bạn thêm cụt tay",
+                            "YT LongHip12"
+                        },
+                        ["Chat Delay"] = 5
+                    },
+                    ["Webhook Settings"] = {
+                        ["Enable"] = false,
+                        ["Link"] = "",
+                        ["Mention"] = "@",
+                        ["SendTimes"] = 1,
+                        ["Interval"] = 1
+                    }
+                }
+
+                loadstring(
+                    game:HttpGet(
+                        "https://raw.githubusercontent.com/xxhumggxx/SkullHub/refs/heads/main/FruitCollect.lua"
+                    )
+                )()
