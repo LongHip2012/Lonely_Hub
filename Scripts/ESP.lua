@@ -1,13 +1,21 @@
+--[[
+    Nhìn Cái 🆑
+    Im Long (Đz Số 1 VN)
+    Và Có Tài Năng: Ảo Tưởng Cực Mạnh
+]]--
+
+print("ESP Lỏ Có Tia (Tracer) ")
+
 local Players = game:GetService("Players")
                 local LocalPlayer = Players.LocalPlayer
                 local Camera = game:GetService("Workspace").CurrentCamera
                 local RunService = game:GetService("RunService")
 
-                -- Bảng lưu trữ ESP và trạng thái toggle
                 local ESPs = {}
                 local isESPEnabled = false
 
-                -- Hàm tạo màu cầu vồng
+                -- Màu Rainbow 🌈
+
                 local function getRainbowColor()
                     local time = tick()
                     local r = (math.sin(time) + 1) / 2
@@ -16,7 +24,7 @@ local Players = game:GetService("Players")
                     return Color3.new(r, g, b)
                 end
 
-                -- Hàm tạo ESP và Tracer cho người chơi
+                -- Tạo ESP Và Tracer
                 local function createESP(player)
                     if
                         player == LocalPlayer or not player.Character or not player.Character:FindFirstChild("Humanoid") or
@@ -25,7 +33,7 @@ local Players = game:GetService("Players")
                         return
                     end
 
-                    -- Xóa ESP cũ nếu tồn tại
+                    -- Xóa ESP cũ nếu có
                     if ESPs[player] then
                         ESPs[player]:Destroy()
                         ESPs[player] = nil
@@ -43,12 +51,12 @@ local Players = game:GetService("Players")
                     billboard.Name = "ESP"
                     billboard.Parent = player.Character
 
-                    -- Tạo Frame để chứa text
+                    -- Frame
                     local frame = Instance.new("Frame", billboard)
                     frame.Size = UDim2.new(1, 0, 1, 0)
                     frame.BackgroundTransparency = 1
 
-                    -- Tạo TextLabel để hiển thị thông tin
+                    -- Text Label ESP
                     local textLabel = Instance.new("TextLabel", frame)
                     textLabel.Size = UDim2.new(1, 0, 1, 0)
                     textLabel.BackgroundTransparency = 1
@@ -57,20 +65,19 @@ local Players = game:GetService("Players")
                     textLabel.TextSize = 14
                     textLabel.Font = Enum.Font.SourceSansBold
 
-                    -- Tạo Highlight
+                    -- Highlight Nhân Vật
                     local highlight = Instance.new("Highlight")
                     highlight.Adornee = player.Character
                     highlight.FillTransparency = 0.5
                     highlight.OutlineTransparency = 0
                     highlight.Parent = player.Character
 
-                    -- Tạo Drawing Line cho Tracer
+                    -- Line Cho Tracer
                     local tracer = Drawing.new("Line")
                     tracer.Visible = true
                     tracer.Thickness = 2
                     tracer.Transparency = 1
 
-                    -- Lưu trữ ESP và Tracer
                     ESPs[player] = {
                         Billboard = billboard,
                         Highlight = highlight,
@@ -79,16 +86,15 @@ local Players = game:GetService("Players")
                         Connection = nil -- Để lưu kết nối RenderStepped
                     }
 
-                    -- Cập nhật màu Highlight dựa trên team
+                    -- Màu Highlight Theo Team
                     local function updateHighlight()
                         if player.Team == LocalPlayer.Team then
-                            highlight.FillColor = Color3.new(0, 1, 0) -- Xanh lá cho cùng team
+                            highlight.FillColor = Color3.new(0, 1, 0) -- Cùng Team
                         else
-                            highlight.FillColor = Color3.new(1, 1, 1) -- Trắng cho khác team
+                            highlight.FillColor = Color3.new(1, 1, 1) -- Khác Team
                         end
                     end
 
-                    -- Cập nhật thông tin ESP và Tracer
                     local function updateESP()
                         if
                             player.Character and player.Character:FindFirstChild("Humanoid") and
@@ -98,14 +104,14 @@ local Players = game:GetService("Players")
                             local distance = (rootPart.Position - Camera.CFrame.Position).Magnitude
                             textLabel.Text =
                                 string.format(
-                                "Name: %s\nHealth: %d\nDistance: %.1f",
+                                "Name: %s\nHealth: %d\nDistance: %.1f", -- Thông Tin Ng Chs
                                 player.Name,
                                 humanoid.Health,
                                 distance
                             )
                             updateHighlight()
 
-                            -- Cập nhật Tracer từ giữa phía dưới màn hình đến giữa nhân vật
+                            -- Tracer từ giữa phía dưới màn hình (bottom)
                             local screenPos, onScreen = Camera:WorldToViewportPoint(rootPart.Position)
                             if onScreen then
                                 tracer.Visible = true
@@ -125,7 +131,7 @@ local Players = game:GetService("Players")
                         end
                     end
 
-                    -- Kết nối cập nhật liên tục
+                    -- cập nhật liên tục
                     local connection = RunService.RenderStepped:Connect(updateESP)
                     ESPs[player].Connection = connection
 
@@ -140,7 +146,7 @@ local Players = game:GetService("Players")
                     )
                 end
 
-                -- Hàm xóa ESP và Tracer
+                -- xóa ESP và Tracer
                 function ESPs:Destroy()
                     for _, esp in pairs(self) do
                         if esp.Billboard then
@@ -161,7 +167,7 @@ local Players = game:GetService("Players")
                     end
                 end
 
-                -- Hàm xử lý khi nhân vật được thêm
+                -- xử lý khi nhân vật được thêm
                 local function onCharacterAdded(player)
                     if isESPEnabled and player.Character then
                         createESP(player)
@@ -176,7 +182,7 @@ local Players = game:GetService("Players")
                     )
                 end
 
-                -- Hàm xử lý người chơi mới
+                -- xử lý người chơi mới vào game
                 local function onPlayerAdded(player)
                     onCharacterAdded(player)
                 end
@@ -184,13 +190,13 @@ local Players = game:GetService("Players")
                 -- Toggle ESP
                 isESPEnabled = not isESPEnabled
                 if isESPEnabled then
-                    -- Kích hoạt ESP cho tất cả người chơi hiện tại
+                    -- Kích hoạt ESP cho tất cả ng chs
                     for _, player in pairs(Players:GetPlayers()) do
                         onPlayerAdded(player)
                     end
-                    -- Theo dõi người chơi mới
+                    -- Theo dõi ng chơi mới vào
                     Players.PlayerAdded:Connect(onPlayerAdded)
-                    -- Xóa ESP khi người chơi rời game
+                    -- Xóa ESP khi người chơi out game
                     Players.PlayerRemoving:Connect(
                         function(player)
                             if ESPs[player] then
@@ -201,7 +207,7 @@ local Players = game:GetService("Players")
                     )
                     print("ESP Enabled")
                 else
-                    -- Vô hiệu hóa ESP
+                    -- Tắt ESP
                     ESPs:Destroy()
                     print("ESP Disabled")
 end
